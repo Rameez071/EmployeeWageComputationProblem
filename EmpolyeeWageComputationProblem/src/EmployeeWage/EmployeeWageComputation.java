@@ -1,47 +1,42 @@
 package EmployeeWage;
 
 public class EmployeeWageComputation {
+    public static final int IS_FULL_TIME = 1;
+    public static final int IS_PART_TIME = 2;
 
-	public static void main(String[] args) {
-		checkAttendance employee = new checkAttendance();
-		System.out.println("Welcome to Employee wage computation problem");
-		employee.isPresent();
-	}
+    public static final int EMP_RATE_PER_HR = 20;
+    public static final int NUM_OF_WORKING_DAYS = 20;
+    public static final int MAX_HRS_IN_MONTH = 100;
 
-}
-class checkAttendance extends calculateWage{
-    int check;
-    static int days = 0;
-    static int workHrs = 0;
-    static int totalWorkHrs = 0;
-    void isPresent(){
-        int wage = 0;
-        int totalWage = 0;
-        while ( days != 20 && totalWorkHrs <= 100 ) {
-            days++;
-            System.out.println(days);
-            check = (int)(Math.floor(Math.random() * 10) % 3);
-            switch(check) {
-                case 0:
-                    workHrs = 8;
+    static int totalEmpWage() {
+        //VARIABLES
+        int empHrs = 0;
+        int totalEmpHrs = 0;
+        int totalWorkingDays = 0;
+
+        //COMPUTATION
+        while (totalEmpHrs <= MAX_HRS_IN_MONTH && totalWorkingDays < NUM_OF_WORKING_DAYS) {
+            totalWorkingDays++;
+            int empCheck = (int) Math.floor(Math.random() * 10) % 3;
+            switch (empCheck) {
+                case IS_FULL_TIME:
+                    empHrs = 8;
                     break;
-                case 1:
-                    workHrs = 4;
+                case IS_PART_TIME:
+                    empHrs = 4;
                     break;
                 default:
-                    workHrs = 0;
+                    empHrs = 0;
                     break;
             }
-            totalWorkHrs = totalWorkHrs + workHrs;
-            wage = dailyWage(workHrs);
-            totalWage = totalWage + wage;
+            totalEmpHrs += empHrs;
+            System.out.println("Days: " + totalWorkingDays + " Emp Hours: " + empHrs);
         }
-        System.out.println("Total earning of employee for a month is "+totalWage);
+        return totalEmpHrs * EMP_RATE_PER_HR;
     }
-}
-class calculateWage {
-    final int wagePerHr = 20;
-    int dailyWage(int workHr){
-        return wagePerHr * workHr;
+
+    public static void main(String args[]) {
+        int totalEmpWage = totalEmpWage();
+        System.out.println("Total Emp Wage: " + totalEmpWage);
     }
 }
