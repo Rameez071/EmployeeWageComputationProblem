@@ -8,14 +8,14 @@ public class EmployeeWageComputation {
     public static final int NUM_OF_WORKING_DAYS = 20;
     public static final int MAX_HRS_IN_MONTH = 100;
 
-    static int totalEmpWage() {
+    static void totalEmpWage(int ratePerHr, int numOfDays, int hrsInMonth) {
         //VARIABLES
         int empHrs = 0;
         int totalEmpHrs = 0;
         int totalWorkingDays = 0;
 
         //COMPUTATION
-        while (totalEmpHrs <= MAX_HRS_IN_MONTH && totalWorkingDays < NUM_OF_WORKING_DAYS) {
+        while (totalEmpHrs <= hrsInMonth && totalWorkingDays < numOfDays) {
             totalWorkingDays++;
             int empCheck = (int) Math.floor(Math.random() * 10) % 3;
             switch (empCheck) {
@@ -32,11 +32,13 @@ public class EmployeeWageComputation {
             totalEmpHrs += empHrs;
             System.out.println("Days: " + totalWorkingDays + " Emp Hours: " + empHrs);
         }
-        return totalEmpHrs * EMP_RATE_PER_HR;
+        int totalWage = totalEmpHrs * ratePerHr;
+        System.out.println("Total Emp Wage for company company is " + totalWage);
     }
 
     public static void main(String args[]) {
-        int totalEmpWage = totalEmpWage();
-        System.out.println("Total Emp Wage: " + totalEmpWage);
+    	//Multiple Company data 
+        totalEmpWage(20,20,100);
+        totalEmpWage(15, 25, 120);
     }
 }
